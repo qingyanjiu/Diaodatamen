@@ -4,13 +4,15 @@ public class Xuanzepaixu {
 	private void sort(int[] numbers) {
 		for(int k=0;k<numbers.length;k++) {
 			int index = k;
+			int min = index;
 			for(int i=index,len=numbers.length;i<len;i++) {
-				if(numbers[index]>numbers[i]) {
-					int tmp = numbers[index];
-					numbers[index] = numbers[i];
-					numbers[i] = tmp;
+				if(numbers[min]>numbers[i]) {
+					min = i;
 				}
 			}
+			int tmp = numbers[index];
+			numbers[index] = numbers[min];
+			numbers[min] = tmp;
 		}
 	}
 
