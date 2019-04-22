@@ -39,8 +39,8 @@ public class ReadHugeFile {
 			HugeFileProcessor processor = new HugeFileProcessor(filePath,startPosition,length,finish);
 			processor.setKeyWord(keyWord);
 			list.add(processor);
-//			executorService.execute(processor);
-			new Thread(processor).start();
+			executorService.execute(processor);
+//			new Thread(processor).start();
 		}
 		
 		try {
@@ -50,6 +50,7 @@ public class ReadHugeFile {
 				total += p.getKeyWordCount().get();
 			}
 			System.out.println("Word '"+keyWord+"' appeared : [ "+total+" ] times");
+			executorService.shutdown();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -58,11 +59,11 @@ public class ReadHugeFile {
 	
 
 	public static void main(String[] args) {
-		String filePath = "C:\\Users\\louisliu\\Downloads\\sg.txt";
+		String filePath = "/Users/louisliu/Downloads/sg.txt";
 //		String filePath = "C:\\Users\\louisliu\\Desktop\\poc.txt";
 		int partsNumber = 8;
 		ReadHugeFile readHugeFile = new ReadHugeFile(filePath, partsNumber);
-		readHugeFile.setKeyWord("Öî¸ðÁÁ");
+		readHugeFile.setKeyWord("è¯¸è‘›äº®");
 		readHugeFile.read();
 	}
 
