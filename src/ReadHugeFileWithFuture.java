@@ -55,15 +55,7 @@ public class ReadHugeFileWithFuture {
 		readHugeFile.setKeyWord("诸葛亮");
 		readHugeFile.read();
 		for(CompletableFuture<Integer> c:readHugeFile.getList()) {
-			try {
-				total += c.get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			total += c.join();
 		}
 		System.out.println(total);
 	}
